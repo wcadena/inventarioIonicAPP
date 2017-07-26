@@ -1,14 +1,59 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Inventarios 2K
-    </ion-title>
+    <ion-title>Inventarios 2K</ion-title>
+    <!--<ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name='contact'></ion-icon>
+      </button>
+    </ion-buttons>-->
+    <ion-buttons end>
+    <button ion-button icon-only (click)="salir()">
+      <ion-icon name="log-out"></ion-icon>
+    </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <ion-list no-border>
+
+    <ion-list-header>
+      <h1>Informe de Mantenimiento</h1>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-icon name="hammer"></ion-icon>
+      Mantenimiento preventivo
+      <ion-note item-end>
+        <button ion-button icon-only (click)="informePreventivo()">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="hammer"></ion-icon>
+      Mantenimiento correctivo
+      <ion-note item-end>
+        <button ion-button icon-only (click)="informecorectivo()">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="hammer"></ion-icon>
+      Generar Reporte
+      <ion-note item-end>
+        <button ion-button icon-only (click)="lanzarInforme()">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-note>
+    </ion-item>
+
+  </ion-list>
+
+
+
+
 </ion-content>

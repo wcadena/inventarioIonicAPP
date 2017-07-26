@@ -16,7 +16,7 @@ import {Platform} from 'ionic-angular'
 
 @Injectable()
 export class AuthService {
-  currentUser: UserData;
+  public currentUser: UserData;
 
   constructor(private iab: InAppBrowser,
               private storage:Storage,
@@ -28,8 +28,8 @@ export class AuthService {
     } else {
       return Observable.create(observer => {
         // At this point make a request to your backend to make a real check!
-        console.log(credentials);
-        let access = (credentials.password === "wcadena" && credentials.email === "wcadena@outlook.com");
+        //console.log(credentials);
+        let access = (credentials.password === "wcadena" && credentials.email === "wcadena@outlook2.com");
         this.currentUser = new UserData('Wagner', 'wcadena@outlook.com');
         //this.lanzarweb("http://inventario.ecuatask.com/");
 
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   public lanzarweb(web:string){
-    const browser = this.iab.create(web);
+     this.iab.create(web);
 
   }
 
@@ -81,8 +81,30 @@ export class AuthService {
       });
       return promesa;
   }
-  cargar_storage(){
-
+  public cargar_storage(){
+    let promesa= new Promise((resolve,reject ) =>{
+      if(this.platform.is("cordova")){
+        //es un dispositivo
+        console.log("carga desde dispositivo");
+        this.storage.ready()
+          .then( () =>{
+            console.log("Listo Para cargar desde el storage");
+            this.storage.get('user').then((val) => {
+              this.currentUser = val;
+              resolve(this.currentUser);
+            });
+          });
+      }else{
+        //esta en la computadora
+        console.log("carga desde computadora");
+        this.currentUser = new UserData(localStorage.getItem('user.name'), localStorage.getItem('user.email'));
+        resolve(this.currentUser);
+      }
+      console.log("------------------------------------------------>mensaje carga");
+    }).catch((err: any) => {
+      console.log(err);
+      });
+    return promesa;
   }
 
   public logout() {
