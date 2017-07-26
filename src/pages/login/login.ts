@@ -2,6 +2,7 @@ import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
+import {UserData} from "../../models/user.model";
 
 
 
@@ -11,23 +12,34 @@ import { AuthService } from '../../providers/auth-service';
 })
 export class LoginPage {
   homepage:any;
+  usu_aux: UserData;
   loading: Loading;
   //registerCredentials = { email: '', password: '' };
   registerCredentials = { email: 'wcadena@outlook.com', password: 'wcadena' };
 
   constructor(private nav: NavController, private auth: AuthService,
     private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
-      this.homepage =HomePage;
+    //declara la pagina a dondedebe ir
+    this.homepage =HomePage;
+
      }
 
   public createAccount() {
     this.nav.push('RegisterPage');
   }
 
+  public grabarClave(user:UserData ){
+
+    this.usu_aux=user;
+  }
+
   public login() {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {
+      if (allowed) {//si esta bien ingresa
+        this.usu_aux =new UserData(this.registerCredentials.email,this.registerCredentials.password);
+        console.log(this.usu_aux);
+        this.auth.guardar_storage();
         this.nav.setRoot(this.homepage);
       } else {
         this.showError("Access Denied");
