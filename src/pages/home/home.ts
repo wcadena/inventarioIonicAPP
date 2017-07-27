@@ -1,4 +1,5 @@
 import { InformePage } from './../informe/informe';
+import { InformesDeMantenimientoPage } from './../informes-de-mantenimiento/informes-de-mantenimiento';
 import { AuthService } from './../../providers/auth-service';
 import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
@@ -21,7 +22,7 @@ export class HomePage {
       this._us.guardar_storage();
   }
   public informePreventivo(){
-      this.navCtrl.setRoot(InformePage);
+      this.navCtrl.setRoot(InformesDeMantenimientoPage);
   }
   public informecorectivo(){
       this.navCtrl.setRoot(InformePage);

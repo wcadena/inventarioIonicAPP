@@ -12,12 +12,15 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 /**paginas */
-import { HomePage ,LoginPage ,CategoriaPage,InformePage} from  '../pages/index.paginas';
+import { HomePage ,LoginPage ,CategoriaPage,InformePage,InformeDeMantenimientoPreventivoPage,SignupPage,CerrarInformePage,InformesDeMantenimientoPage,EnviarInformeAPage } from  '../pages/index.paginas';
+
 /**modelos */
 //import {UserData} from '../models/user.model';
 /**providers */
 import { AuthService } from '../providers/auth-service';
 import { InfoProvider } from '../providers/info/info';
+/**para navegacion */
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -25,10 +28,16 @@ import { InfoProvider } from '../providers/info/info';
     HomePage ,
     LoginPage ,
     CategoriaPage,
-    InformePage
+    InformePage,
+    InformeDeMantenimientoPreventivoPage,
+    SignupPage,
+    CerrarInformePage,
+    InformesDeMantenimientoPage,
+    EnviarInformeAPage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -38,7 +47,12 @@ import { InfoProvider } from '../providers/info/info';
     HomePage ,
     LoginPage ,
     CategoriaPage,
-    InformePage
+    InformePage,
+    InformeDeMantenimientoPreventivoPage,
+    SignupPage,
+    CerrarInformePage,
+    InformesDeMantenimientoPage,
+    EnviarInformeAPage
   ],
   providers: [
     StatusBar,
