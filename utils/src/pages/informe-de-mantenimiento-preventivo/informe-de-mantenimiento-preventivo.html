@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Informe de mantenimiento preventivo
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page1">
+  <form id="informeDeMantenimientoPreventivo-form1">
+    <ion-item id="informeDeMantenimientoPreventivo-select1">
+      <ion-label>
+        Solicitante
+      </ion-label>
+      <ion-select name="solicitante">
+        <ion-option>
+          A1
+        </ion-option>
+        <ion-option>
+          A2
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-select2">
+      <ion-label>
+        Área
+      </ion-label>
+      <ion-select name=""></ion-select>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-input1">
+      <ion-label>
+        N° de orden
+      </ion-label>
+      <ion-input type="text" placeholder="XX-#####" name="no_orden"></ion-input>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-input2">
+      <ion-label>
+        Fecha de Solicitud
+      </ion-label>
+      <ion-input type="date" placeholder="" name="fecha_solicitud"></ion-input>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-input3">
+      <ion-label>
+        Fecha de ejecución
+      </ion-label>
+      <ion-input type="date" placeholder="" name="fecha_ejecucion"></ion-input>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-input4">
+      <ion-label>
+        Hora de Inicio
+      </ion-label>
+      <ion-input type="time" placeholder="" name="hora_inicio"></ion-input>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-input5">
+      <ion-label>
+        Hora fin
+      </ion-label>
+      <ion-input type="time" placeholder="" name="hora_fin"></ion-input>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-select3">
+      <ion-label>
+        Categoría
+      </ion-label>
+      <ion-select name="informe_manto_prev_cate_id">
+        <ion-option>
+          cate1
+        </ion-option>
+        <ion-option>
+          cate2
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item id="informeDeMantenimientoPreventivo-input6">
+      <ion-label>
+        Requerimiento
+      </ion-label>
+      <ion-input type="text" placeholder=""></ion-input>
+    </ion-item>
+    <button id="informeDeMantenimientoPreventivo-button14" ion-button color="balanced" block icon-right>
+      Guardar
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </form>
+</ion-content>
