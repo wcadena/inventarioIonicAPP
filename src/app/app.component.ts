@@ -24,15 +24,10 @@ export class MyApp {
     console.log("Ingreso a ready app.components");
       this._us.cargar_storage()
         .then(()=>{
-          console.log("Dentro de la promesa 1");
-          console.log(this._us.currentUser);
-          console.log("Dentro de la promesa 2");
-          if(this._us.currentUser.name != null){
+          if(this._us.currentUser.access_token != null){
             this.rootPage = HomePage;
-            console.log("es usuario de app");
           }else{
             this.rootPage = LoginPage;
-            console.log("No es usuario de app");
           };
           statusBar.styleDefault();
           splashScreen.hide();

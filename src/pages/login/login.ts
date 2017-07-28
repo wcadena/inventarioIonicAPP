@@ -14,8 +14,8 @@ export class LoginPage {
   homepage:any;
   usu_aux: UserData;
   loading: Loading;
-  //registerCredentials = { email: '', password: '' };
-  registerCredentials = { email: 'wcadena@outlook.com', password: 'wcadena' };
+  registerCredentials = { email: '', password: '' };
+
 
   constructor(private nav: NavController, private auth: AuthService,
     private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
@@ -37,10 +37,16 @@ export class LoginPage {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
       if (allowed) {//si esta bien ingresa
-        this.usu_aux =new UserData(this.registerCredentials.email,this.registerCredentials.password);
-        console.log(this.usu_aux);
-        this.auth.guardar_storage();
-        this.nav.setRoot(this.homepage);
+        this.auth.consultaapi_clave2(this.registerCredentials.email,this.registerCredentials.password)
+          .then(
+              () => {
+                console.log("------------>")
+                this.usu_aux =this.auth.currentUser;
+                console.log(this.usu_aux);
+                this.auth.guardar_storage();
+                this.nav.setRoot(this.homepage);
+              });
+
       } else {
         this.showError("Access Denied");
       }
