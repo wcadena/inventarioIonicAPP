@@ -28,19 +28,17 @@ export class LoginPage {
     this.nav.push('RegisterPage');
   }
 
-  public grabarClave(user:UserData ){
 
-    this.usu_aux=user;
-  }
-
+  /**
+   * evento de login desde la form
+   */
   public login() {
     this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
+    this.auth.login_auth_services(this.registerCredentials).subscribe(allowed => {
       if (allowed) {//si esta bien ingresa
         this.auth.consultaapi_clave2(this.registerCredentials.email,this.registerCredentials.password)
           .then(
               () => {
-                console.log("------------>")
                 this.usu_aux =this.auth.currentUser;
                 console.log(this.usu_aux);
                 this.auth.guardar_storage();
@@ -48,7 +46,7 @@ export class LoginPage {
               });
 
       } else {
-        this.showError("Access Denied");
+        this.showError("Aceso Denegado");
       }
     },
       error => {
@@ -56,19 +54,26 @@ export class LoginPage {
       });
   }
 
+  /**
+   * presenta el mensaje de cargando
+   */
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...',
+      content: 'Por favor espere...',
       dismissOnPageChange: true
     });
     this.loading.present();
   }
 
+  /**
+   * da un mensaje de error
+   * @param text
+   */
   showError(text) {
     this.loading.dismiss();
 
     let alert = this.alertCtrl.create({
-      title: 'Fail',
+      title: 'Error',
       subTitle: text,
       buttons: ['OK']
     });

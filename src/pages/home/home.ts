@@ -3,7 +3,7 @@ import { InformesDeMantenimientoPage } from './../informes-de-mantenimiento/info
 import { AuthService } from './../../providers/auth-service';
 import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 
 
@@ -13,7 +13,7 @@ import { NavController, Platform } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController,private platform: Platform, private _us:AuthService) {
+  constructor(public navCtrl: NavController, private _us:AuthService) {
 
   }
   public salir(){

@@ -3,6 +3,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { ToastController } from 'ionic-angular';
 /**plugins*/
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {UserData} from "../models/user.model";
@@ -30,13 +31,19 @@ export class AuthService {
   constructor(private iab: InAppBrowser,
               private storage:Storage,
               private platform: Platform,
+              private toastCtrl: ToastController,
               http: Http) {
                 this.http = http;
                }
 
-  public login(credentials) {
+  /**
+   * recive las
+   * @param credentials
+   * @returns {any}
+   */
+  public login_auth_services(credentials) {
     if (credentials.email === null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
+        return Observable.throw("Please insert credentials");
     } else {
       return Observable.create(observer => {
         // At this point make a request to your backend to make a real check!
@@ -55,7 +62,7 @@ export class AuthService {
                 observer.next(false);
                 observer.complete();
               });
-        //this.currentUser = new UserData('Wagner', 'wcadena@outlook.com');
+
         //this.lanzarweb("http://inventario.ecuatask.com/");
 
       });
@@ -74,17 +81,22 @@ export class AuthService {
     }
   }
 
+  /***
+   * lanza de una pagina web
+   * @param web
+   */
   public lanzarweb(web:string){
      this.iab.create(web);
 
   }
 
-  public getUserInfo() : UserData {
-    return this.currentUser;
-  }
 
+
+  /**
+   * guarda los datos en el storage del dispositivo o en el computador para realizar pruebas, es asincrono
+   * @returns {Promise<T>}
+   */
   public guardar_storage(){
-    console.log("Guardar en storage");
       let promesa= new Promise((resolve,reject ) =>{
           if(this.platform.is("cordova")){
             //es un dispositivo
@@ -113,6 +125,11 @@ export class AuthService {
       });
       return promesa;
   }
+
+  /***
+   * carga los datos de memoria listo para ver si es usuario valido o se debe logear
+   * @returns {Promise<TResult|T>}
+   */
   public cargar_storage(){
     let promesa= new Promise((resolve,reject ) =>{
       if(this.platform.is("cordova")){
@@ -130,12 +147,18 @@ export class AuthService {
         resolve(this.currentUser);
       }
     }).catch((err: any) => {
-        console.log(err);
+        this.presentToast(err);
       });
     return promesa;
   }
 
-
+  /**
+   * consulta el token de transaccion y lo pone en la variable global this.currentUser
+   * la informacion lo toma del servicio que se configura el config, es un dato asincronico
+   * @param username
+   * @param password
+   * @returns {Promise<T>}
+   */
   public consultaapi_clave2(username:string,password:string){
 
       let promesa= new Promise((resolve,reject ) =>{
@@ -155,7 +178,6 @@ export class AuthService {
           this.http.post(url_tok,data)
           .subscribe(res => {
               this.data = res.json();
-
               if(this.data.error){
                 console.log("Error:["+this.data.error+"] - "+this.data.message)
                 console.log(this.data);
@@ -175,6 +197,10 @@ export class AuthService {
       return promesa;
   }
 
+  /**
+   * ejemplo de consulta, no se usa en lugar alguno por el momento
+   * @returns {Promise<T>}
+   */
   public consultaapiget_clave(){
     console.log("Consulta api login");
     let promesa= new Promise((resolve,reject ) =>{
@@ -186,19 +212,40 @@ export class AuthService {
           console.log(this.data);
           this.guardar_storage()
         }, error => {
-          console.log(error);
+          this.presentToast(error);
         });
     });
     return promesa;
   }
 
-
+  /**
+   * salir de aplicacion,borra los datos guardados del login
+   * @returns {any}
+   */
   public logout() {
     return Observable.create(observer => {
       this.currentUser = null;
       observer.next(true);
       observer.complete();
     });
+  }
+
+  /**
+   * lansa un mensaje tost muy discreto
+   * @param mensaje
+   */
+  presentToast(mensaje:string) {
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 }
 
