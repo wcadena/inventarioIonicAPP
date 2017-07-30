@@ -19,8 +19,11 @@ import { HomePage ,LoginPage ,CategoriaPage,InformePage,InformeDeMantenimientoPr
 /**providers */
 import { AuthService } from '../providers/auth-service';
 import { InfoProvider } from '../providers/info/info';
+import { HTTP } from '@ionic-native/http';
+//import { Http } from '@angular/http';
 /**para navegacion */
 import { HttpModule } from '@angular/http';
+import {UserSisProvider} from '../providers/user-sis/user-sis-service';
 
 @NgModule({
   declarations: [
@@ -60,8 +63,11 @@ import { HttpModule } from '@angular/http';
     AuthService,
     InAppBrowser,
     IonicStorageModule,
+    HTTP,
+    //Http,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    InfoProvider
+    InfoProvider,
+    UserSisProvider
   ]
 })
 export class AppModule {}

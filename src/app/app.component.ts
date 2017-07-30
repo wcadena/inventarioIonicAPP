@@ -5,18 +5,21 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage ,LoginPage } from  '../pages/index.paginas';
 
-//import {UserData} from '../models/user.model';
+import {UserData} from '../models/user.model';
 import {AuthService} from '../providers/auth-service';
 import { ToastController } from 'ionic-angular';
+import {UserSisProvider} from "../providers/user-sis/user-sis-service";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any;
+  public logUser:UserData;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private _us:AuthService, private toastCtrl: ToastController) {
+    private _us:AuthService, private toastCtrl: ToastController,
+    private _us_srv:UserSisProvider) {
     platform.ready().then(() => {
      //splashScreen.show();
       this._us.cargar_storage()
@@ -24,6 +27,13 @@ export class MyApp {
           if(this._us.currentUser==null){
             this.rootPage = LoginPage;
           }else if(this._us.currentUser.access_token != null){
+            this._us_srv.load()
+            .then(()=>{
+              console.log("/////////////////////////////////////////////////////");
+              console.log(this._us_srv.data);
+            });
+
+            this.logUser=this._us.currentUser;
             this.presentToast("Bienvenido: "+this._us.currentUser.email);
             this.rootPage = HomePage;
           }else{
@@ -50,7 +60,7 @@ export class MyApp {
       position: 'bottom'
     });
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
+      //console.log('Dismissed toast');
     });
 
     toast.present();

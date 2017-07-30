@@ -1,4 +1,4 @@
-export class  InfoData {
+export class  InfoCategoriaData {
   id:	number	;
   categoria:	string 	;
 

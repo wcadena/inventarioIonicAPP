@@ -4,22 +4,17 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { ToastController } from 'ionic-angular';
-/**plugins*/
+// plugins
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {UserData} from "../models/user.model";
-/**
- * storage
- */
+// storage
 import { Storage } from '@ionic/storage';
-/**
- * elemtos de ionic angular
- */
+// * elemtos de ionic angular
 import {Platform} from 'ionic-angular'
-/**para navegacion */
-
+// para navegacion
 import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { CLIENT_ID,CLIENT_SECRET,GRANT_TYPE,URL_TOKEN } from './../pages/config/app.config';
+import { CLIENT_ID,CLIENT_SECRET,GRANT_TYPE,URL_TOKEN } from '../config/app.config';
 
 @Injectable()
 export class AuthService {
@@ -151,6 +146,11 @@ export class AuthService {
       });
     return promesa;
   }
+
+  /**
+   * consulta catalogos de usuarios
+   */
+
 
   /**
    * consulta el token de transaccion y lo pone en la variable global this.currentUser
