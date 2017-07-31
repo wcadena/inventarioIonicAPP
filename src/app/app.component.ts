@@ -27,6 +27,7 @@ export class MyApp {
           if(this._us.currentUser==null){
             this.rootPage = LoginPage;
           }else if(this._us.currentUser.access_token != null){
+            //this._us_srv.currentUser= this._us.currentUser;
             this._us_srv.load()
             .then(()=>{
               console.log("/////////////////////////////////////////////////////");
