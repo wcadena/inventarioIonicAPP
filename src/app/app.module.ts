@@ -24,6 +24,7 @@ import { HTTP } from '@ionic-native/http';
 /**para navegacion */
 import { HttpModule } from '@angular/http';
 import {UserSisProvider} from '../providers/user-sis/user-sis-service';
+import { InfoSisProvider } from '../providers/info-sis/info-sis';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {UserSisProvider} from '../providers/user-sis/user-sis-service';
     //Http,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     InfoProvider,
-    UserSisProvider
+    UserSisProvider,
+    InfoSisProvider
   ]
 })
 export class AppModule {}
