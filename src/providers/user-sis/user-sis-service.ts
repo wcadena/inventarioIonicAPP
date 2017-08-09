@@ -1,3 +1,4 @@
+import { URL_SERVICIOS } from './../../config/app.config';
 
 
 
@@ -90,8 +91,7 @@ export class UserSisProvider {
     let promesa= new Promise((resolve,reject ) =>{
       //let url_tok =URL_TOKEN;
       let permiso ="Bearer "+this.currentUser.access_token;
-      let url_tok = "http://inventario.ecuatask.com/api/users";
-      console.log(permiso);
+      let url_tok = URL_SERVICIOS+"users";
       this.http.get(url_tok,{ headers: { Authorization: permiso } })
         .subscribe(res => {
           this.data = res.json();
@@ -104,6 +104,26 @@ export class UserSisProvider {
     return promesa;
   }
 
+  /**
+   * load user con correo y token
+   */
+  public loadUser(email:string){
+    console.log("Consulta api login");
+    let promesa= new Promise((resolve,reject ) =>{
+      //let url_tok =URL_TOKEN;
+      let permiso ="Bearer "+this.currentUser.access_token;
+      let url_tok = URL_SERVICIOS+"usuario"+"?email="+email;
+      this.http.get(url_tok,{ headers: { Authorization: permiso } })
+        .subscribe(res => {
+          this.data = res.json();
+          console.log(this.data);
+
+        }, error => {
+          this.presentToast(error);
+        });
+    });
+    return promesa;
+  }
 
   /**
    * lansa un mensaje tost muy discreto
