@@ -91,6 +91,7 @@ export class UserSisProvider {
       //let url_tok =URL_TOKEN;
       let permiso ="Bearer "+this.currentUser.access_token;
       let url_tok = "http://inventario.ecuatask.com/api/users";
+      console.log(permiso);
       this.http.get(url_tok,{ headers: { Authorization: permiso } })
         .subscribe(res => {
           this.data = res.json();
