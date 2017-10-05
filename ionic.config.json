@@ -1,5 +1,8 @@
 {
   "name": "inventarioApp",
   "app_id": "495af5fe",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
